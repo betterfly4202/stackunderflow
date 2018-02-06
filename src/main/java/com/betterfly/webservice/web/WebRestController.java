@@ -1,7 +1,8 @@
 package com.betterfly.webservice.web;
 
-import com.betterfly.webservice.domain.dto.PostsSaveRequestDto;
+import com.betterfly.webservice.dto.PostsSaveRequestDto;
 import com.betterfly.webservice.domain.posts.PostsRepository;
+import com.betterfly.webservice.service.PostsService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,15 +28,19 @@ public class WebRestController {
 
     private PostsRepository postsRepository;
 
+    private PostsService postsService;
+
     @GetMapping("/hello")
     public String hello(){
         return "helloWorld";
     }
 
     @PostMapping("/posts")
-    public void savePosts(
+    public Long savePosts(
             @RequestBody PostsSaveRequestDto dto){
-        postsRepository.save(dto.toEntity());
+//        postsRepository.save(dto.toEntity());
+
+        return postsService.save(dto);
     }
 
 }
