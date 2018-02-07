@@ -1,7 +1,9 @@
 package com.betterfly.webservice.web;
 
+import com.betterfly.webservice.service.PostsService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @AllArgsConstructor
 public class WebController {
 
+    private PostsService postsService;
+
     @GetMapping("/")
-    public String main(){
+    public String main(Model model){
 
         /*
             handlebars-spring-boot-starter 라이브러리를 의존성에 추가했기 때문에
@@ -23,6 +27,7 @@ public class WebController {
             suffix : .hbs
             자동 매칭하는 ViewResolver 역할
          */
+        model.addAttribute("posts",postsService.findAllDesc());
         return "main";
     }
 }
