@@ -1,13 +1,15 @@
 package com.betterfly.webservice.web;
 
+import com.betterfly.webservice.domain.hello.Hello;
+import com.betterfly.webservice.domain.hello.HelloRepository;
 import com.betterfly.webservice.dto.PostsSaveRequestDto;
 import com.betterfly.webservice.domain.posts.PostsRepository;
 import com.betterfly.webservice.service.PostsService;
 import lombok.AllArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * Created by betterFLY on 2018. 2. 6.
@@ -41,6 +43,22 @@ public class WebRestController {
 //        postsRepository.save(dto.toEntity());
 
         return postsService.save(dto);
+    }
+
+
+    private HelloRepository helloRepository;
+
+    @GetMapping("/add")
+    public Hello add(Hello hello){
+        Hello helloData = helloRepository.save(hello);
+        return helloData;
+    }
+
+    @GetMapping("/list")
+    public List<Hello> list(Model model){
+        List<Hello> helloList = helloRepository.findAll();
+
+        return helloList;
     }
 
 }
