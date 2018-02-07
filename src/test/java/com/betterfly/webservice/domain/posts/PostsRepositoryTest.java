@@ -53,8 +53,8 @@ public class PostsRepositoryTest {
         //then
         /** 테스트 결과 검증 */
         Posts posts = postsList.get(0);
-        assertThat(posts.getTitle(), is("테스트 게시글"));
-        assertThat(posts.getContent(), is("테스트 본문내용"));
+        assertThat(posts.getTitle(), is("제목1"));
+        assertThat(posts.getContent(), is("내용1"));
         assertThat(posts.getAuthor(), is("betterFLY"));
 
     }
