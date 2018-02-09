@@ -15,5 +15,5 @@ spring:
   h2:
     console:
       enabled: true
-  thymeleaf:
-    cache: false
+handlebars:
+  cache: false
