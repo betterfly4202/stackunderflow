@@ -48,5 +48,7 @@ public class PostsServiceTest {
         assertThat(posts.getAuthor()).isEqualTo(dto.getAuthor());
         assertThat(posts.getTitle()).isEqualTo(dto.getTitle());
         assertThat(posts.getContent()).isEqualTo(dto.getContent());
+
+        //String / StringBuffer // StringBuilder 활용 TDD
     }
 }
