@@ -2,10 +2,13 @@
 
 그리고 Node.js 공식 홈페이지에 나와있는 기본 접속 테스트 코드의 js 파일을 생성한다.
 
+```javascript
 const http = require('http');
+
 
 const hostname = '127.0.0.1';
 const port = 3000;
+
 
 const server = http.createServer((req, res) => {
     res.statusCode = 200;
@@ -13,10 +16,12 @@ res.setHeader('Content-Type', 'text/plain');
 res.end('Hello World\n');
 });
 
+
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
 });
 
+```
 
 
 Terminal을 실행하여 js파일이 위치한 디렉토리로 이동한다
