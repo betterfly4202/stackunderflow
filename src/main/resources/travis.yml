@@ -1,19 +1,21 @@
-spring:
-  profiles:
-    active: local
+language: java
+jdk:
+  - openjdk8
 
+branches:
+  only:
+    - master
 
----
-spring:
-  profiles: local
-  datasource:
-    data: classpath:data-h2.sql
-  jpa:
-    show-sql: true
-    hibernate:
-      ddl-auto: create-drop
-  h2:
-    console:
-      enabled: true
-handlebars:
-  cache: false
+#Travis Server Home
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$home/.gradle'
+
+script: "./gradlew clean build"
+
+#when CI completed send mail
+notifications:
+  email:
+    recipients:
+      - betterfly4202@gmail.com
