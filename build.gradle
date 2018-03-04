@@ -36,6 +36,7 @@ repositories {
 ext['hibernate.version'] = '5.2.11.Final'
 
 dependencies {
+	compile 'org.fitnesse:fitnesse:20081201'
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
