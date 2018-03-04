@@ -14,11 +14,18 @@ cache:
 
 script: "./gradlew clean build"
 
+before_deploy:
+  - zip -r stackunderflow *
+  - mkdir -p deploy
+  - mv stackunderflow.zip deploy/stackunderflow.zip
+
+
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
     secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
-    bucket: stackunderflow-deploy-s3 # 6-3-3에서 생성한 S3 버킷
+    local_dir: deploy
+    bucket: stackunderflow-deploy-s3
     region: ap-northeast-2
     skip_cleanup: true
     acl: public_read
@@ -26,6 +33,22 @@ deploy:
     on:
       repo: betterfly88/stackunderflow
       branch: master
+
+
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: stackunderflow-deploy-s3
+    key: stackunderflow.zip # S3 버킷에 저장된 springboot-webservice.zip 파일을 EC2로 배포
+    bundle_type: zip
+    application: stackunderflow # 웹 콘솔에서 등록한 CodeDeploy 어플리케이션
+    deployment_group: stackunderflow-deploy-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      repo: betterfly88/stackunderflow
+      branch: master
+
 
 
 #when CI completed send mail
