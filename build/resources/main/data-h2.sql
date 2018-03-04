@@ -1,0 +1,2 @@
+insert into posts (title, author, content, created_date, modified_date) values ('제목1','betterFLY', '내용1', now(), now());
+insert into posts (title, author, content, created_date, modified_date) values ('제목2','betterFLY@gmail.com', '내용2', now(), now());
